@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Category>
+@{
+	ViewBag.CardTitle = "View Products";
+	ViewBag.PageTitle = "Product Management";
+}
+
+<div>
+	<a class="btn btn-primary" asp-action="Create">Create</a>
+</div>
+<br />
+<table id="mytable" class="table table-hover" width="100%">
+	<thead>
+	<tr>
+		<td>Name</td>
+		<td>Description</td>
+		<td class="text-left">Price</td>
+		<td>Category</td>
+		<td>Actions</td>
+	</tr>
+	</thead>
+
+</table>
+@section Scripts {
+	<script src="~/js/products.js"></script>
+}
