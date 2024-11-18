@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using myshop.Utilities;
 using Myshop.DataAccess.Data;
 using Myshop.DataAccess.Implementation;
 using Myshop.Entities.Repositories;
@@ -18,10 +20,17 @@ namespace TaskITIMvc2024
                 {
                     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
                 });
+
+            builder.Services.AddIdentity<IdentityUser,IdentityRole>(options=>
+            options.Lockout.DefaultLockoutTimeSpan=TimeSpan.FromDays(4))
+                .AddDefaultTokenProviders()
+                .AddDefaultUI()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
             builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
             //must register repository to project resolve service
-
+            builder.Services.AddSingleton<IEmailSender, EmailSender>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
@@ -40,14 +49,14 @@ namespace TaskITIMvc2024
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.MapRazorPages();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{area=Admin}/{controller=Category}/{action=Index}/{id?}");
+                pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
-               name: "Customer",
-               pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
+               name: "Admin",
+               pattern: "{area=Admin}/{controller=Category}/{action=Index}/{id?}");
 
             app.Run();
         }
