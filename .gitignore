@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Myshop.Entities/Models/OrderDetail.cs
+/Myshop.Entities/Models/OrderHeader.cs
+/Myshop.Entities/ViewModels/ShoppingCart.cs
