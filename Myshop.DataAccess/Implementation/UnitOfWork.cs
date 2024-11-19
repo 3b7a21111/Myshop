@@ -16,12 +16,14 @@ namespace Myshop.DataAccess.Implementation
 
         public IproductRepository Product { get; private set; }
 
+        public IShoppingCartRepository ShoppingCart { get; private set; }
         public UnitOfWork(ApplicationDbContext context)
         {
             this.context = context;
             Category = new CategoryRepository(context);
             Product = new productRepository(context);
-        }
+			ShoppingCart = new ShoppingCartRepository(context);
+		}
         public int Complete()
         {
             return context.SaveChanges();

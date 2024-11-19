@@ -9,7 +9,8 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <a href="\customer\Home\Details\@item.Id">
+                        <a asp-area="Customer"
+                           asp-controller="Home" asp-action="Details" asp-route-ProductId="@item.Id">
                             <img class="card-img-top" src="~/@item.Image" alt="..." width="450" height="300" />
                         </a>
                         <!-- Product details-->
