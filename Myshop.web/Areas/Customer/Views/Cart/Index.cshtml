@@ -66,8 +66,8 @@
 @* 								<div class="summary-item"><span class="text">Subtotal</span><span class="price">$360</span></div>
 								<div class="summary-item"><span class="text">Discount</span><span class="price">$0</span></div>
 								<div class="summary-item"><span class="text">Shipping</span><span class="price">$0</span></div> *@
-								<div class="summary-item"><span class="text">Total</span><span class="price">$@Model.TotalCarts.ToString()</span></div>
-								<button type="button" class="btn btn-primary btn-lg btn-block">Checkout</button>
+								<div class="summary-item"><span class="text">Total</span><span class="price">$@Model.OrderHeader.TotalPrice.ToString()</span></div>
+								<a type="button" href="/customer/cart/summary" class="btn btn-primary btn-lg btn-block">Checkout</a>
 							</div>
 						</div>
 					</div>

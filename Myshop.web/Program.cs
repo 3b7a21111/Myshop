@@ -5,6 +5,7 @@ using myshop.Utilities;
 using Myshop.DataAccess.Data;
 using Myshop.DataAccess.Implementation;
 using Myshop.Entities.Repositories;
+using Stripe;
 
 
 namespace TaskITIMvc2024
@@ -20,6 +21,7 @@ namespace TaskITIMvc2024
                 {
                     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
                 });
+            builder.Services.Configure<StripeData>(builder.Configuration.GetSection("Stripe"));
 
             builder.Services.AddIdentity<IdentityUser,IdentityRole>(options=>
             options.Lockout.DefaultLockoutTimeSpan=TimeSpan.FromDays(4))
@@ -33,9 +35,8 @@ namespace TaskITIMvc2024
             builder.Services.AddSingleton<IEmailSender, EmailSender>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-
-			// Add services to the container.
-			builder.Services.AddControllersWithViews();
+            // Add services to the container.
+            builder.Services.AddControllersWithViews();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -47,6 +48,9 @@ namespace TaskITIMvc2024
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            //stripe pipeline 
+            StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
 
             app.UseAuthorization();
             app.MapRazorPages();
