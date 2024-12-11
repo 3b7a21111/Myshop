@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Category>
+@{
+	ViewBag.CardTitle = "View Orders";
+	ViewBag.PageTitle = "Order Management";
+}
+
+
+<table id="mytable" class="table table-hover" width="100%">
+	<thead>
+		<tr>
+			<td>Id</td>
+			<td>Name</td>
+			<td>PhoneNumber</td>
+			<td>Email</td>
+			<td>OrderStatus</td>
+			<td class="text-left">Total</td>
+			<td>Actions</td>
+		</tr>
+	</thead>
+
+</table>
+@section Scripts {
+	<script src="~/js/orders.js"></script>
+}

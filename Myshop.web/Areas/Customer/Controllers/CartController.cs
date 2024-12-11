@@ -144,7 +144,6 @@ namespace Myshop.web.Areas.Customer.Controllers
             //var service = new SessionService(stripeClient);
             Session session = service.Create(options);
             shoppingCartVM.OrderHeader.SessionId = session.Id;
-            shoppingCartVM.OrderHeader.PaymentIntentId = session.PaymentIntentId;
             unitOfWork.Complete();
 
             Response.Headers.Add("Locaion", session.Url);
@@ -164,7 +163,7 @@ namespace Myshop.web.Areas.Customer.Controllers
             if(session.PaymentStatus.ToLower() == "paid")
             {
                 unitOfWork.OrderHeader.UpdateStatus(id, SD.Approve, SD.Approve);
-                //orderHeader.PaymentIntentId = session.PaymentIntentId;
+                orderHeader.PaymentIntentId = session.PaymentIntentId;
                 unitOfWork.Complete();
             }
             List<ShoppingCart> shoppingCarts = unitOfWork.ShoppingCart

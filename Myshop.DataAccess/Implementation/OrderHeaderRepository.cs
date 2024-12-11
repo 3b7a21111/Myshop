@@ -24,12 +24,13 @@ namespace Myshop.DataAccess.Implementation
 			context.OrderHeaders.Update(orderHeader);
 		}
 
-		public void UpdateStatus(int id, string OrderStatus, string PaymentStatus)
+		public void UpdateStatus(int id, string OrderStatus, string ? PaymentStatus)
 		{
 			var orderfromdb = context.OrderHeaders.FirstOrDefault(x => x.Id == id);
 			if(orderfromdb != null)
 			{
 				orderfromdb.OrderStatus = OrderStatus;
+				orderfromdb.PaymentDate = DateTime.Now;
 				if (PaymentStatus != null)
 				{
 					orderfromdb.PaymentStatus = PaymentStatus;
